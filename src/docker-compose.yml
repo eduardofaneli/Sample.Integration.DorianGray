@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  sample.integration.api:
+    image: ${DOCKER_REGISTRY-}sampleintegrationapi
+    build:
+      context: .
+      dockerfile: Sample.Integration.Api/Dockerfile
