@@ -3,14 +3,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Sample.Integration.Api.Data;
+using Sample.Integration.Api.Data.Interfaces;
 using Sample.Integration.Api.Options;
+using Sample.Integration.Api.Repositories;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
 
-namespace Sample.Integration.Api.Extenions
+namespace Sample.Integration.Api.Extensions
 {
     public static class ServiceCollectionExtensions
     {
@@ -89,6 +92,15 @@ namespace Sample.Integration.Api.Extenions
                     ValidateAudience = false
                 };
             });
+
+            return services;
+        }
+
+        public static IServiceCollection AddCustomIoC(this IServiceCollection services)
+        {
+            services.AddScoped<DbSession>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<TesteDapperRepository>();
 
             return services;
         }

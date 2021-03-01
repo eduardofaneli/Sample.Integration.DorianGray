@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Sample.Integration.Api.Data.Interfaces;
+using Sample.Integration.Api.Models;
+using Sample.Integration.Api.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +68,27 @@ namespace Sample.Integration.Api.Controllers
         public IActionResult Post(WeatherForecast forecast)
         {
             return Ok(forecast);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("dapper")]
+        public IEnumerable<TesteDapper> Get(
+            [FromServices] TesteDapperRepository repository)
+        {
+            return repository.Get();
+        }
+
+        [AllowAnonymous]
+        [HttpPost("dapper")]
+        public IActionResult PostDapper(
+            [FromServices] IUnitOfWork unitOfWork,
+            [FromServices] TesteDapperRepository repository,
+            [FromBody] TesteDapper model)
+        {
+            unitOfWork.BeginTransaction();
+            repository.Save(model);
+            unitOfWork.Commit();
+            return Ok();
         }
     }
 }

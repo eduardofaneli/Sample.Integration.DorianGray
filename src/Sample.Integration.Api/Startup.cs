@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Sample.Integration.Api.Extenions;
+using Sample.Integration.Api.Extensions;
 
 namespace Sample.Integration.Api
 {
@@ -21,7 +21,8 @@ namespace Sample.Integration.Api
         {
             services.AddControllers();
             services.AddCustomSwagger();
-            services.AddJwtBearerAuthentication(Configuration);            
+            services.AddJwtBearerAuthentication(Configuration);
+            services.AddCustomIoC();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

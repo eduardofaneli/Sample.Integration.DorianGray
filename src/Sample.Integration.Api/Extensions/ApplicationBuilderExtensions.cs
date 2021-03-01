@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace Sample.Integration.Api.Extenions
+namespace Sample.Integration.Api.Extensions
 {
     public static class ApplicationBuilderExtensions
     {
