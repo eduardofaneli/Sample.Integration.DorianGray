@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Sample.Integration.Api.Models;
 using Sample.Integration.Api.Repositories;
 using Sample.Integration.Api.Services;
+using Sample.Integration.Api.Services.Interfaces;
 using System;
 using System.Threading.Tasks;
 
@@ -20,10 +21,13 @@ namespace Sample.Integration.Api.Controllers
         }
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult<dynamic>> Authenticate([FromBody] User model)
+        public async Task<ActionResult<dynamic>> Authenticate([FromServices] IAdService adService, [FromBody] User model)
         {
             // Recupera o usuário
             var user = UserRepository.Get(model.Username, model.Password);
+
+            // Autenticação no AD por LDAP
+            var authenticated = adService.Authenticate("MY_DOMAIN", model.Username, model.Password);
 
             // Verifica se o usuário existe
             if (user == null)

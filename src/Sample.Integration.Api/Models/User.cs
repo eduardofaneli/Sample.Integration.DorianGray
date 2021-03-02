@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Sample.Integration.Api.Models
@@ -10,21 +11,11 @@ namespace Sample.Integration.Api.Models
     /// </summary>
     public class User
     {
-        /// <summary>
-        /// Code of the user
-        /// </summary>
         public int Id { get; set; }
-        /// <summary>
-        /// Username
-        /// </summary>
+        public string Email { get; set; }
         public string Username { get; set; }
-        /// <summary>
-        /// Password
-        /// </summary>
         public string Password { get; set; }
-        /// <summary>
-        /// Role of the user
-        /// </summary>
         public string Role { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -7,6 +7,8 @@ using Sample.Integration.Api.Data;
 using Sample.Integration.Api.Data.Interfaces;
 using Sample.Integration.Api.Options;
 using Sample.Integration.Api.Repositories;
+using Sample.Integration.Api.Services;
+using Sample.Integration.Api.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -101,6 +103,7 @@ namespace Sample.Integration.Api.Extensions
             services.AddScoped<DbSession>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<TesteDapperRepository>();
+            services.AddScoped<IAdService, AdService>();
 
             return services;
         }
